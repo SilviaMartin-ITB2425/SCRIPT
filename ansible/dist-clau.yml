@@ -1,0 +1,13 @@
+---
+- name: Distribuir Clau
+  hosts: webservers
+  become: true
+  vars_files: defaults.yml
+
+  tasks:
+      - name: Distribuir clau ansible
+        ansible.posix.authorized_key:
+          user: ansible
+          key: "{{ copy_local_key }}"
+          state: present
+          exclusive: true
